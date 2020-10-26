@@ -4,6 +4,7 @@ import { Container, Number } from './styles';
 
 function Cell({ isBomb, number, revealed }) {
   const [isRevealed, setIsRevealed] = useState(false);
+  const [isFlagged, setIsFlagged] = useState(false);
 
   useEffect(() => {
     setIsRevealed(revealed || false)
@@ -24,8 +25,10 @@ function Cell({ isBomb, number, revealed }) {
   return (
     <Container 
       revealed={isRevealed} 
-      onClick={() => setIsRevealed(true)}
+      onClick={() => setIsRevealed(isFlagged ? false : true)}
+      onContextMenu={(e) => {e.preventDefault(); setIsFlagged(!isFlagged) }}
     >
+      {isFlagged && 'F'}
       {isRevealed && content}
     </Container>
   );
