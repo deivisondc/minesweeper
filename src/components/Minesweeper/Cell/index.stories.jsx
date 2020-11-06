@@ -23,26 +23,39 @@ Default.args = {
   revealed: false,
 }
 
-export const Empty = Template.bind({});
-Empty.argTypes = {
+export const Revealed = Template.bind({});
+Revealed.argTypes = {
   nearbyBombCounter: { 
     control: { type: 'range', min: 0, max: 8, step: 1 },
   },
+  revealed: { 
+    control: { type: 'hidden' },
+  },
 };
-Empty.args = {
+Revealed.args = {
   nearbyBombCounter: 0,
   revealed: true,
 };
 
 export const Bomb = Template.bind({});
+Bomb.argTypes = {
+  revealed: { 
+    control: { type: 'hidden' },
+  },
+};
 Bomb.args = {
   bomb: true,
   revealed: true,
 }
 
 export const Flagged = Template.bind({});
+Flagged.argTypes = {
+  revealed: { 
+    control: { type: 'hidden' },
+  },
+};
 Flagged.args = {
   flagged: true,
-  revealed: true,
+  revealed: false,
 }
 
