@@ -40,7 +40,9 @@ function Cell({ cellData }) {
 
   const handleRightClick = (e) => {
     e.preventDefault();
-    dispatch(flagCell(cellData.row, cellData.column))
+    if (!cellData.revealed) {
+      dispatch(flagCell(cellData.row, cellData.column))
+    }
   }
 
   const bombIcon = (
