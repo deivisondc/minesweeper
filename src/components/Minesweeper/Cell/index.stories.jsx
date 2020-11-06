@@ -1,3 +1,8 @@
+import { Provider } from 'react-redux';
+
+import GlobalStyles from '../../../global';
+import store from '../../../store';
+
 import Cell from './';
 
 // eslint-disable-next-line
@@ -6,7 +11,12 @@ export default {
   component: Cell,
 }
 
-const Template = (args) => <Cell {...args} />
+const Template = (args) => (
+  <Provider store={store}>
+    <GlobalStyles />
+    <Cell cellData={{...args}} />
+  </Provider>
+);
 
 export const Default = Template.bind({});
 Default.args = {
@@ -15,18 +25,24 @@ Default.args = {
 
 export const Empty = Template.bind({});
 Empty.argTypes = {
-  number: { 
+  nearbyBombCounter: { 
     control: { type: 'range', min: 0, max: 8, step: 1 },
   },
 };
 Empty.args = {
-  number: 0,
-  revealed: true
+  nearbyBombCounter: 0,
+  revealed: true,
 };
 
 export const Bomb = Template.bind({});
 Bomb.args = {
-  isBomb: true,
-  revealed: true
+  bomb: true,
+  revealed: true,
+}
+
+export const Flagged = Template.bind({});
+Flagged.args = {
+  flagged: true,
+  revealed: true,
 }
 
