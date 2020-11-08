@@ -7,7 +7,7 @@ import { Container, Number } from './styles';
 
 function Cell({ cellData }) {
   const dispatch = useDispatch();
-  const { minesweeper } = useSelector((store) => store.minesweeperReducer);
+  const { config, minesweeper } = useSelector((store) => store.minesweeperReducer);
 
   useEffect(() => {
     if (cellData.revealed && cellData.nearbyBombCounter === 0) {
@@ -16,7 +16,7 @@ function Cell({ cellData }) {
           const row = cellData.row + rowOffset;
           const column = cellData.column + columnOffset;
 
-          if ((row >= 0 && row < 5) && (column >= 0 && column < 5)) {
+          if ((row >= 0 && row < config.rows) && (column >= 0 && column < config.columns)) {
             if (!minesweeper[row][column].revealed && !minesweeper[row][column].flagged) {
               dispatch(revealCell(row, column));
             }
@@ -24,7 +24,7 @@ function Cell({ cellData }) {
         }
       }
     } 
-  }, [cellData, minesweeper, dispatch]);
+  }, [cellData, config, minesweeper, dispatch]);
 
   useEffect(() => {
     if (cellData.revealed && cellData.bomb) {

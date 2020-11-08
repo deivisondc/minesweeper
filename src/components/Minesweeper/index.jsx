@@ -12,7 +12,11 @@ function Minesweeper({ columns, rows, mineCount }) {
   const { minesweeper, safeCells, status } = useSelector((store) => store.minesweeperReducer);
 
   useEffect(() => {
-    dispatch(initialize({ rows, columns, mineCount }));
+    if (rows && columns && mineCount) {
+      const maxCells = rows * columns;
+      const mineCountVerified = mineCount > maxCells ? maxCells : mineCount;
+      dispatch(initialize({ rows, columns, mineCount: mineCountVerified }));
+    }
   }, [dispatch, rows, columns, mineCount]);
   
   useEffect(() => {
